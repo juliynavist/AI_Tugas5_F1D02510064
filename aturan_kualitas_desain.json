@@ -1,0 +1,57 @@
+{
+  "judul": "Diagnosis masalah kualitas desain digital (keterbacaan teks, ketajaman gambar cetak, dan warna cetak)",
+  "batas": "Aturan berasal dari dokumentasi W3C (WCAG 2.1) dan Adobe Help (Photoshop dan Creative Cloud). Hanya mencakup tiga masalah: kontras teks, resolusi gambar untuk cetak, dan perbedaan warna layar (RGB) dengan cetak (CMYK). Tidak mencakup tipografi, tata letak, atau penilaian estetika. Hasilnya saran awal, bukan keputusan akhir.",
+  "pertanyaan": {
+      "teks berukuran normal (di bawah 18 pt, atau di bawah 14 pt jika tebal)": "Apakah teks berukuran normal (di bawah 18 pt, atau di bawah 14 pt jika tebal)?",
+      "rasio kontras teks terhadap latarnya di bawah 4,5:1": "Apakah rasio kontras teks terhadap latarnya di bawah 4,5:1?",
+      "teks berukuran besar (minimal 18 pt, atau minimal 14 pt jika tebal)": "Apakah teks berukuran besar (minimal 18 pt, atau minimal 14 pt jika tebal)?",
+      "rasio kontras teks terhadap latarnya di bawah 3:1": "Apakah rasio kontras teks terhadap latarnya di bawah 3:1?",
+      "desain akan dicetak": "Apakah desain ini akan dicetak?",
+      "resolusi gambar pada ukuran cetak akhir di bawah 300 ppi": "Apakah resolusi gambar pada ukuran cetak akhir di bawah 300 ppi?",
+      "hasil cetak gambar terlihat buram atau pecah": "Apakah gambar pada hasil cetak terlihat buram atau pecah?",
+      "desain dibuat dalam mode warna RGB": "Apakah desain dibuat dalam mode warna RGB?",
+      "warna hasil cetak (atau pratinjau cetak) terlihat lebih kusam atau berbeda dari layar": "Apakah warna hasil cetak (atau pratinjau cetak) terlihat lebih kusam atau berbeda dari layar?"
+    },
+    "bertentangan": [
+      ["teks berukuran normal (di bawah 18 pt, atau di bawah 14 pt jika tebal)", "teks berukuran besar (minimal 18 pt, atau minimal 14 pt jika tebal)"] ],
+    "aturan": [
+      {
+        "id": "R1",
+        "jika": ["teks berukuran normal (di bawah 18 pt, atau di bawah 14 pt jika tebal)", "rasio kontras teks terhadap latarnya di bawah 4,5:1"],
+        "mode": "dan", "maka": "kontras teks kurang",
+        "sumber": ["S1"]
+      },{
+        "id": "R2",
+        "jika": ["teks berukuran besar (minimal 18 pt, atau minimal 14 pt jika tebal)", "rasio kontras teks terhadap latarnya di bawah 3:1"],
+        "mode": "dan", "maka": "kontras teks kurang",
+        "sumber": ["S1"]
+      },{
+        "id": "R3",
+        "jika": ["desain akan dicetak", "resolusi gambar pada ukuran cetak akhir di bawah 300 ppi"],
+        "mode": "dan", "maka": "resolusi cetak kurang",
+        "sumber": ["S2", "S3"]
+      },{
+        "id": "R4",
+        "jika": ["resolusi cetak kurang", "hasil cetak gambar terlihat buram atau pecah"],
+        "mode": "dan", "maka": "gambar buram karena resolusi rendah",
+        "sumber": ["S2", "S3"]
+      },{
+        "id": "R5",
+        "jika": ["desain akan dicetak", "desain dibuat dalam mode warna RGB", "warna hasil cetak (atau pratinjau cetak) terlihat lebih kusam atau berbeda dari layar"],
+        "mode": "dan", "maka": "perbedaan gamut warna RGB ke CMYK",
+        "sumber": ["S4", "S5"]
+      } ],
+    "saran": {
+      "kontras teks kurang": "Tingkatkan kontras warna teks terhadap latar belakang (misalnya buat teks lebih gelap atau latar belakang lebih terang) hingga mencapai minimal 4,5:1 untuk teks normal atau 3:1 untuk teks besar.",
+      "resolusi cetak kurang": "Ganti dengan gambar sumber yang jumlah pikselnya lebih besar, atau perkecil ukuran cetaknya, sampai resolusi pada ukuran cetak akhir sekitar 300 ppi.",
+      "gambar buram karena resolusi rendah": "Ganti dengan gambar sumber yang jumlah pikselnya lebih besar, atau perkecil ukuran cetaknya, sampai resolusi pada ukuran cetak akhir sekitar 300 ppi.",
+      "perbedaan gamut warna RGB ke CMYK": "Konversi ruang warna dokumen ke CMYK sebelum dicetak atau lakukan penyesuaian soft proofing untuk mengantisipasi penurunan saturasi warna."
+    },
+    "sumber": {
+      "S1": "Web Content Accessibility Guidelines (WCAG) 2.1, W3C, https://www.w3.org/TR/WCAG21/, diakses 13 Nov 2026",
+      "S2": "Resize images, Adobe Photoshop Help, Adobe, https://helpx.adobe.com/photoshop/desktop/crop-resize-transform/resize-adjust-resolution/resize-images.html, diakses 13 Nov 2026",
+      "S3": "Image size, resolution, and resampling in Photoshop, Adobe Photoshop Help, Adobe, https://helpx.adobe.com/photoshop/desktop/crop-resize-transform/resize-adjust-resolution/resampling.html, diakses 13 Nov 2026",
+      "S4": "About color modes, Adobe Photoshop Help, Adobe, https://helpx.adobe.com/photoshop/using/color-modes.html, diakses 13 Nov 2026",
+      "S5": "Soft-proofing colors, Adobe Photoshop Help, Adobe, https://helpx.adobe.com/photoshop/using/soft-proofing-colors.html, diakses 13 Nov 2026"
+    }
+}

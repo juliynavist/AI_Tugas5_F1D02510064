@@ -1,0 +1,117 @@
+HASIL PENGUJIAN SISTEM PAKAR DIAGNOSA KUALITAS DESAIN DIGITAL
+
+Nama Mahasiswa : Lale Juliesti Ayuningkusuma
+NIM            : F1D02510064
+Metode         : Forward Chaining (Penalaran Maju)
+Basis Aturan   : aturan_kualitas_desain.json (Standar W3C WCAG 2.1 & Adobe Help)
+================================================================================
+
+KASUS 1: Diagnostik Kontras Teks Ukuran Normal (Aturan R1)
+--------------------------------------------------------------
+
+Deskripsi: Menguji kemampuan sistem mendeteksi rasio kontras rendah pada teks ukuran normal sesuai standar aksesibilitas W3C.
+
+Transkrip Pertanyaan & Jawaban:
+1. Apakah teks berukuran normal (di bawah 18 pt, atau di bawah 14 pt jika tebal)? (y/t) > y
+2. Apakah rasio kontras teks terhadap latarnya di bawah 4,5:1? (y/t) > y
+3. Apakah teks berukuran besar (minimal 18 pt, atau minimal 14 pt jika tebal)? (y/t) > t
+4. Apakah rasio kontras teks terhadap latarnya di bawah 3:1? (y/t) > t
+5. Apakah desain ini akan dicetak? (y/t) > t
+6. Apakah resolusi gambar pada ukuran cetak akhir di bawah 300 ppi? (y/t) > t
+7. Apakah gambar pada hasil cetak terlihat buram atau pecah? (y/t) > t
+8. Apakah desain dibuat dalam mode warna RGB? (y/t) > t
+9. Apakah warna hasil cetak (atau pratinjau cetak) terlihat lebih kusam atau berbeda dari layar? (y/t) > t
+
+Fakta awal: teks berukuran normal (di bawah 18 pt, atau di bawah 14 pt jika tebal), rasio kontras teks terhadap latarnya di bawah 4,5:1
+Proses Inferensi:
+Siklus 1: R1 -> kontras teks kurang
+Siklus 2: tidak ada aturan baru, berhenti
+Kesimpulan : kontras teks kurang
+Alasan     : kontras teks kurang <- R1 (teks berukuran normal (di bawah 18 pt, atau di bawah 14 pt jika tebal), rasio kontras teks terhadap latarnya di bawah 4,5:1) [S1]
+Saran      : Tingkatkan kontras warna teks terhadap latar belakang (misalnya buat teks lebih gelap atau latar belakang lebih terang) hingga mencapai minimal 4,5:1 untuk teks normal atau 3:1 untuk teks besar.
+
+KASUS 2: Diagnostik Resolusi Cetak Bertingkat / Multi-Step (Aturan R3 -> R4)
+------------------------------------------------------------------------------
+Deskripsi: Menguji rantai penalaran maju berantai (chaining) di mana hasil siklus pertama memicu aturan baru pada siklus kedua.
+
+Transkrip Pertanyaan & Jawaban:
+1. Apakah teks berukuran normal (di bawah 18 pt, atau di bawah 14 pt jika tebal)? (y/t) > t
+2. Apakah rasio kontras teks terhadap latarnya di bawah 4,5:1? (y/t) > t
+3. Apakah teks berukuran besar (minimal 18 pt, atau minimal 14 pt jika tebal)? (y/t) > t
+4. Apakah rasio kontras teks terhadap latarnya di bawah 3:1? (y/t) > t
+5. Apakah desain ini akan dicetak? (y/t) > y
+6. Apakah resolusi gambar pada ukuran cetak akhir di bawah 300 ppi? (y/t) > y
+7. Apakah gambar pada hasil cetak terlihat buram atau pecah? (y/t) > y
+8. Apakah desain dibuat dalam mode warna RGB? (y/t) > t
+9. Apakah warna hasil cetak (atau pratinjau cetak) terlihat lebih kusam atau berbeda dari layar? (y/t) > t
+
+Fakta awal: desain akan dicetak, resolusi gambar pada ukuran cetak akhir di bawah 300 ppi, hasil cetak gambar terlihat buram atau pecah
+Proses Inferensi:
+Siklus 1: R3 -> resolusi cetak kurang
+Siklus 2: R4 -> gambar buram karena resolusi rendah
+Siklus 3: tidak ada aturan baru, berhenti
+Kesimpulan : gambar buram karena resolusi rendah
+Alasan: gambar buram karena resolusi rendah <- R4 (resolusi cetak kurang, hasil cetak gambar terlihat buram atau pecah) [S2, S3]
+        resolusi cetak kurang <- R3 (desain akan dicetak, resolusi gambar pada ukuran cetak akhir di bawah 300 ppi) [S2, S3]
+Saran: Ganti dengan gambar sumber yang jumlah pikselnya lebih besar, atau perkecil ukuran cetaknya, sampai resolusi pada ukuran cetak akhir sekitar 300 ppi.
+
+
+KASUS 3: Kasus Negatif / Tidak Ditemukan Masalah
+-------------------------------------------------
+Deskripsi: Menguji kestabilan sistem saat input pengguna memenuhi syarat standar kualitas desain sehingga tidak ada aturan masalah yang terpicu.
+
+Transkrip Pertanyaan & Jawaban:
+1. Apakah teks berukuran normal (di bawah 18 pt, atau di bawah 14 pt jika tebal)? (y/t) > t
+2. Apakah rasio kontras teks terhadap latarnya di bawah 4,5:1? (y/t) > t
+3. Apakah teks berukuran besar (minimal 18 pt, atau minimal 14 pt jika tebal)? (y/t) > y
+4. Apakah rasio kontras teks terhadap latarnya di bawah 3:1? (y/t) > t
+5. Apakah desain ini akan dicetak? (y/t) > y
+6. Apakah resolusi gambar pada ukuran cetak akhir di bawah 300 ppi? (y/t) > t
+7. Apakah gambar pada hasil cetak terlihat buram atau pecah? (y/t) > t
+8. Apakah desain dibuat dalam mode warna RGB? (y/t) > t
+9. Apakah warna hasil cetak (atau pratinjau cetak) terlihat lebih kusam atau berbeda dari layar? (y/t) > t
+
+Fakta awal: teks berukuran besar (minimal 18 pt, atau minimal 14 pt jika tebal), desain akan dicetak
+Proses Inferensi:
+Siklus 1: tidak ada aturan baru, berhenti
+Kesimpulan : tidak ada masalah yang dapat disimpulkan dari fakta yang diberikan.
+
+KASUS 4: Diagnostik Perbedaan Gamut Warna Layar ke Cetak (Aturan R5)
+-------------------------------------------------------------------------
+Deskripsi: Menguji aturan manajemen warna saat dokumen berbasis RGB langsung dicetak tanpa konversi ruang warna ke CMYK.
+
+Transkrip Pertanyaan & Jawaban:
+1. Apakah teks berukuran normal (di bawah 18 pt, atau di bawah 14 pt jika tebal)? (y/t) > t
+2. Apakah rasio kontras teks terhadap latarnya di bawah 4,5:1? (y/t) > t
+3. Apakah teks berukuran besar (minimal 18 pt, atau minimal 14 pt jika tebal)? (y/t) > t
+4. Apakah rasio kontras teks terhadap latarnya di bawah 3:1? (y/t) > t
+5. Apakah desain ini akan dicetak? (y/t) > y
+6. Apakah resolusi gambar pada ukuran cetak akhir di bawah 300 ppi? (y/t) > t
+7. Apakah gambar pada hasil cetak terlihat buram atau pecah? (y/t) > t
+8. Apakah desain dibuat dalam mode warna RGB? (y/t) > y
+9. Apakah warna hasil cetak (atau pratinjau cetak) terlihat lebih kusam atau berbeda dari layar? (y/t) > y
+
+Fakta awal: desain akan dicetak, desain dibuat dalam mode warna RGB, warna hasil cetak (atau pratinjau cetak) terlihat lebih kusam atau berbeda dari layar
+Proses Inferensi:
+Siklus 1: R5 -> perbedaan gamut warna RGB ke CMYK
+Siklus 2: tidak ada aturan baru, berhenti
+Kesimpulan :perbedaan gamut warna RGB ke CMYK
+Alasan: perbedaan gamut warna RGB ke CMYK <- R5 (desain akan dicetak, desain dibuat dalam mode warna RGB, warna hasil cetak (atau pratinjau cetak) terlihat lebih kusam atau berbeda dari layar) [S4, S5]
+Saran: Konversi ruang warna dokumen ke CMYK sebelum dicetak atau lakukan penyesuaian soft proofing untuk mengantisipasi penurunan saturasi warna.
+
+KASUS 5: Validasi Konflik Logika Fakta (Penanganan Input Bertentangan)
+-------------------------------------------------------------------------
+Deskripsi: Menguji mekanisme pencegahan kontradiksi apabila pengguna menjawab'ya' pada dua kondisi yang saling meniadakan (teks normal & teks besar).
+Transkrip Pertanyaan & Jawaban:
+1. Apakah teks berukuran normal (di bawah 18 pt, atau di bawah 14 pt jika tebal)? (y/t) > y
+2. Apakah rasio kontras teks terhadap latarnya di bawah 4,5:1? (y/t) > t
+3. Apakah teks berukuran besar (minimal 18 pt, atau minimal 14 pt jika tebal)? (y/t) > y
+4. Apakah rasio kontras teks terhadap latarnya di bawah 3:1? (y/t) > t
+5. Apakah desain ini akan dicetak? (y/t) > t
+6. Apakah resolusi gambar pada ukuran cetak akhir di bawah 300 ppi? (y/t) > t
+7. Apakah gambar pada hasil cetak terlihat buram atau pecah? (y/t) > t
+8. Apakah desain dibuat dalam mode warna RGB? (y/t) > t
+9. Apakah warna hasil cetak (atau pratinjau cetak) terlihat lebih kusam atau berbeda dari layar? (y/t) > t
+Output Sistem:
+Konflik: 'teks berukuran normal (di bawah 18 pt, atau di bawah 14 pt jika tebal)' dan 'teks berukuran besar (minimal 18 pt, atau minimal 14 pt jika tebal)' tidak boleh ya bersamaan.
+[Program berhenti dengan kode keluar 1]
