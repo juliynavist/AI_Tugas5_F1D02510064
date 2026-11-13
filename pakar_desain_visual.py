@@ -9,11 +9,9 @@ import sys
 
 FILE_ATURAN = os.path.join(os.path.dirname(os.path.abspath(__file__)), "aturan_kualitas_desain.json")
 
-
 def muat_json(path):
     with open(path, encoding="utf-8") as f:
         return json.load(f)
-
 
 def cari_pertanyaan_dasar(kb):
     hasil_rule = {r["maka"] for r in kb["aturan"]}
@@ -29,8 +27,7 @@ def forward_chain(rules, fakta_awal):
     """Mesin penelusuran forward chaining yang ringkas."""
     memori = set(fakta_awal)
     riwayat = []
-    siklus = 1
-    
+    siklus = 1   
     while True:
         baru = False
         for r in rules:
@@ -44,21 +41,17 @@ def forward_chain(rules, fakta_awal):
                 riwayat.append(r)
                 baru = True
                 print(f"Siklus {siklus}: {r['id']} -> {r['maka']}")
-
         if not baru:
             break
         siklus += 1
-
     peta_rule = {r['maka']: r for r in rules}
     return memori, peta_rule, riwayat
-
 
 def ambil_kesimpulan(peta_rule, memori):
     terpakai = set()
     for r in peta_rule.values():
         terpakai.update(s for s in r["jika"] if s in memori)
     return [f for f in peta_rule if f not in terpakai and f in memori]
-
 
 def tanya_user(no, teks):
     while True:
@@ -74,7 +67,6 @@ def tanya_user(no, teks):
             return False
         print("   Jawab y atau t.")
 
-
 def cetak_alasan(target, peta, memori, sumber_set, indent=0):
     if target not in peta:
         return
@@ -86,7 +78,6 @@ def cetak_alasan(target, peta, memori, sumber_set, indent=0):
     for sub in pakai:
         if sub in peta:
             cetak_alasan(sub, peta, memori, sumber_set, indent + 1)
-
 
 def main():
     kb = muat_json(FILE_ATURAN)
@@ -125,9 +116,7 @@ def main():
         print("Sumber:")
         for s in sorted(sumber_set):
             print(f"  {s}: {kb['sumber'][s]}")
-
     print("\nCatatan:", kb["batas"])
-
 
 if __name__ == "__main__":
     main()

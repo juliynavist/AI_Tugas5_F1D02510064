@@ -13,17 +13,16 @@
 
 * **Bahasa:** Python 3 (diuji pada Python versi terbaru), tanpa memerlukan *library* eksternal tambahan.
 * **Berkas Utama:**
-  * `pakar_desain_visual.py` (Mesin inferensi *Forward Chaining* dan antarmuka CLI).
-  * `aturan_kualitas_desain.json` (Basis pengetahuan berisi aturan, pertanyaan, saran, dan referensi sumber).
-  * `hasil_pengujian.txt` (Dokumen transkrip lengkap berisi 5 skenario pengujian sistem).
-  * `screenshot/` (Folder berisi tangkapan layar terminal dari hasil eksekusi program).
+* `pakar_desain_visual.py` (Mesin inferensi *Forward Chaining* dan antarmuka CLI).
+* `aturan_kualitas_desain.json` (Basis pengetahuan berisi aturan, pertanyaan, saran, dan referensi sumber).
+* `hasil_pengujian.txt` (Dokumen transkrip lengkap berisi 5 skenario pengujian sistem).
+* `screenshot/` (Folder berisi tangkapan layar terminal dari hasil eksekusi program).
 
 * **Cara Menjalankan (dari folder repository):**
 ```bash
 python pakar_desain_visual.py
 
 ```
-
 Jawab setiap pertanyaan interaktif yang muncul dengan mengetik `y` (ya) atau `t` (tidak). Pastikan nilai rasio kontras dan resolusi (ppi) telah diperiksa sebelumnya menggunakan alat bantu seperti pengecek kontras atau dialog *Image Size* pada aplikasi desain.
 
 ---

@@ -14,8 +14,7 @@
     },
     "bertentangan": [
       ["teks berukuran normal (di bawah 18 pt, atau di bawah 14 pt jika tebal)", "teks berukuran besar (minimal 18 pt, atau minimal 14 pt jika tebal)"] ],
-    "aturan": [
-      {
+    "aturan": [{
         "id": "R1",
         "jika": ["teks berukuran normal (di bawah 18 pt, atau di bawah 14 pt jika tebal)", "rasio kontras teks terhadap latarnya di bawah 4,5:1"],
         "mode": "dan", "maka": "kontras teks kurang",
@@ -39,8 +38,8 @@
         "id": "R5",
         "jika": ["desain akan dicetak", "desain dibuat dalam mode warna RGB", "warna hasil cetak (atau pratinjau cetak) terlihat lebih kusam atau berbeda dari layar"],
         "mode": "dan", "maka": "perbedaan gamut warna RGB ke CMYK",
-        "sumber": ["S4", "S5"]
-      } ],
+        "sumber": ["S4", "S5"] 
+    } ],
     "saran": {
       "kontras teks kurang": "Tingkatkan kontras warna teks terhadap latar belakang (misalnya buat teks lebih gelap atau latar belakang lebih terang) hingga mencapai minimal 4,5:1 untuk teks normal atau 3:1 untuk teks besar.",
       "resolusi cetak kurang": "Ganti dengan gambar sumber yang jumlah pikselnya lebih besar, atau perkecil ukuran cetaknya, sampai resolusi pada ukuran cetak akhir sekitar 300 ppi.",
